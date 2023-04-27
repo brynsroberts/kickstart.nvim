@@ -44,6 +44,7 @@ vim.g.maplocalleader = ' '
 
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -76,6 +77,9 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  -- faster jk response
+  'rainbowhxch/accelerated-jk.nvim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -118,6 +122,8 @@ require('lazy').setup({
 
   { -- Theme inspired by Atom
     'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
     config = function()
       vim.cmd.colorscheme 'tokyonight-moon'
     end,
@@ -242,6 +248,8 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+vim.keymap.set('i', 'jk', '<Esc>', {})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
